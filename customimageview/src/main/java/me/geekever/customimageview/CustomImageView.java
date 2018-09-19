@@ -25,7 +25,6 @@ public class CustomImageView extends android.support.v7.widget.AppCompatImageVie
     private Paint mPaint;
     private PorterDuffXfermode mXfermode;
     private Drawable mShapeDrawble;
-    private Bitmap mMaskBitmap;
 
     public CustomImageView(Context context) {
         this(context, null, 0);
@@ -48,12 +47,12 @@ public class CustomImageView extends android.support.v7.widget.AppCompatImageVie
 
     @Override
     protected void onDraw(Canvas canvas) {
-        if (mMaskBitmap!=null){
+        if (mShapeDrawble!=null){
             int saved = canvas.saveLayer(null, null);
             super.onDraw(canvas);
             mPaint.setXfermode(mXfermode);
             canvas.saveLayer(null, mPaint);
-            canvas.drawBitmap(mMaskBitmap, 0, 0, null);
+            mShapeDrawble.draw(canvas);
             mPaint.setXfermode(null);
             canvas.restoreToCount(saved);
         }
@@ -67,7 +66,7 @@ public class CustomImageView extends android.support.v7.widget.AppCompatImageVie
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        mMaskBitmap = drawableToBitmap(mShapeDrawble, getMeasuredWidth(), getMeasuredHeight());
+        mShapeDrawble.setBounds(0,0,getMeasuredWidth(),getMeasuredHeight());
     }
 
     public void setShapeDrawble(Drawable shapeDrawble){
@@ -77,17 +76,4 @@ public class CustomImageView extends android.support.v7.widget.AppCompatImageVie
         }
     }
 
-    protected final Bitmap drawableToBitmap (Drawable drawable, int width, int height) {
-
-        if (drawable instanceof BitmapDrawable) {
-            return ((BitmapDrawable)drawable).getBitmap();
-        }
-
-        Bitmap bitmap = Bitmap.createBitmap( width, height, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-        drawable.setBounds(0, 0, width, height);
-        drawable.draw(canvas);
-
-        return bitmap;
-    }
 }
