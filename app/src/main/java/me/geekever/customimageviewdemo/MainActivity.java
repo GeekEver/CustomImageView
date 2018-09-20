@@ -13,6 +13,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mCustomImageView = findViewById(R.id.customImageView);
-        mCustomImageView.setShapeDrawble(getDrawable(R.drawable.test_shape2));
+        mCustomImageView.setShapeDrawble(getDrawable(R.drawable.nougat));
     }
 }

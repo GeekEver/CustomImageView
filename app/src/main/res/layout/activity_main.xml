@@ -16,7 +16,7 @@
         android:layout_marginTop="8dp"
         android:src="@drawable/ic_launcher_background"
         android:scaleType="fitXY"
-        app:shape_drawable="@drawable/zhangjunhead">
+        app:shape_drawable="@drawable/test_shape2">
     </me.geekever.customimageview.CustomImageView>
 
 </RelativeLayout>
